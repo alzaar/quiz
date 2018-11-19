@@ -9,7 +9,7 @@ class QuestionList extends React.Component {
       {this.props.questions.map((question, index) => {
         if (question.id === this.props.current) {
         return (
-            <Question {...question} question={question} key={index}/>
+            <Question {...question} question={question} key={index} setScore={this.props.setScore} setCurrent={this.props.setCurrent} score={this.props.score}/>
         )
       }
       return '';

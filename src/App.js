@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import QuestionList from './comps/QuestionList'
+import ScoreBox from './comps/ScoreBox'
+import Results from './comps/Results'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -85,10 +88,32 @@ class App extends Component {
       current: 1
     }
   }
+  setScore = (score) => {
+    this.setState({score:  score})
+  }
+
+  setCurrent = () =>   {
+    let current = this.state.current;
+    current += 1;
+    this.setState({current: current});
+  }
   render() {
+    let scoreBox = '';
+    let result ='';
+    if (this.state.current > this.state.questions.length) {
+        scoreBox = '';
+        result = <Results {...this.state} />
+    } else {
+      scoreBox = <ScoreBox {...this.state} />
+      result = '';
+    }
+
+
     return (
       <React.Fragment>
-        <QuestionList questions={this.state.questions} {...this.state}/>
+        {scoreBox}
+        <QuestionList questions={this.state.questions} {...this.state} setScore={this.setScore} setCurrent={this.setCurrent} score={this.state.score}/>
+        {result}
       </React.Fragment>
     );
   }

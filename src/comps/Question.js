@@ -3,8 +3,15 @@ import React from 'react';
 
 class Question extends React.Component {
 
-  onChange = () => {
-
+  onChange = (e) => {
+    e.preventDefault();
+    let selected = e.target.value;
+    if (this.props.question.correct === selected) {
+      let score = this.props.score;
+      score += 1;
+      this.props.setScore(score);
+    }
+    this.props.setCurrent();
   }
   render() {
     console.log(this.props)
